@@ -1,7 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-
+use Illuminate\Support\Facades\Http;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -14,5 +14,10 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    $response = Http::get('https://dummy.restapiexample.com/api/v1/employees');
+    $employers = $response->offsetGet("data");
+    foreach ($employers as $employee) {
+        echo $employee["id"]. "\n<br>";
+        echo $employee["employee_name"]. "\n<br><br>";
+    }
 });

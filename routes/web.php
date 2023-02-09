@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Http;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -13,11 +14,11 @@ use Illuminate\Support\Facades\Http;
 |
 */
 
+
 Route::get('/', function () {
-    $response = Http::get('https://dummy.restapiexample.com/api/v1/employees');
-    $employers = $response->offsetGet("data");
-    foreach ($employers as $employee) {
-        echo $employee["id"]. "\n<br>";
-        echo $employee["employee_name"]. "\n<br><br>";
-    }
+    $response = Http::get('https://63e42ea98e1ed4ccf6dbe11a.mockapi.io/api/people');
+    return $response->json();
+});
+Route::get('/create', function () { //essa rota deveria ser POST porem deixei como get poruqe não há um formulário, apenas uma rota para testar
+    $response = Http::dd()->post('https://63e42ea98e1ed4ccf6dbe11a.mockapi.io/api/people');
 });
